@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  main-server-admin:
+    build: ./apps/main-server-admin
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - main-server-server
+
+  main-server-server:
+    build: ./apps/main-server-server
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/usr/src/app
+    command: npm run start:dev
